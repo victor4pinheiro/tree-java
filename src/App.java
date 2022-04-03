@@ -1,5 +1,11 @@
 import java.util.Random;
 
+/**
+ * Classe para interagir com a árvore
+ * 
+ * @version 0.1.0
+ * @author Victor Pinheiro
+ */
 public class App {
   public static void main(String[] args) throws Exception {
     Arvore arvore = new Arvore();
