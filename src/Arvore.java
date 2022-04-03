@@ -1,6 +1,18 @@
+/**
+ * Classe para permitir a inserção e listagem de nós na árvore através da raiz
+ * 
+ * @version 0.1.0
+ * @author Victor Pinheiro
+ */
 public class Arvore {
-  Nodo raiz;
+  public Nodo raiz;
 
+  /**
+   * Insere o nó na árvore verificando se o número possuído pelo nó é maior ou
+   * menor que raiz da árvore
+   * 
+   * @param novo nó a ser inserido
+   */
   public void inserir(Nodo novo) {
     if (raiz == null) {
       raiz = novo;
@@ -25,12 +37,16 @@ public class Arvore {
     }
   }
 
+  /**
+   * Lista todos os nós de forma recursiva
+   * 
+   * @param inicio nó inicial que a listagem continue a partir dele
+   */
   public void listar(Nodo inicio) {
-    System.out.print(" " + inicio.numero);
-    if (inicio.esquerda != null)
-      listar(inicio.esquerda);
-
-    if (inicio.direita != null)
-      listar(inicio.direita);
+    if (inicio == null)
+      return;
+    listar(inicio.esquerda);
+    System.out.println(inicio.numero);
+    listar(inicio.direita);
   }
 }
