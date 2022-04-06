@@ -2,7 +2,8 @@
  * Classe padrão para criar cada nó da árvore
  * 
  * @version 0.1.0
- * @author Victor Pinheiro
+ * @author Victor Gabriel Alves Pereira
+ * @author Victor Matheus Carvalho Pinheiro
  */
 public class Nodo {
   int numero;

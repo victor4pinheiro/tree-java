@@ -2,7 +2,8 @@
  * Classe para permitir a inserção e listagem de nós na árvore através da raiz
  * 
  * @version 0.1.0
- * @author Victor Pinheiro
+ * @author Victor Gabriel Alves Pereira
+ * @author Victor Matheus Carvalho Pinheiro
  */
 public class Arvore {
   public Nodo raiz;
