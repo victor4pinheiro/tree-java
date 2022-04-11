@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -9,54 +10,64 @@ import java.util.Scanner;
  */
 public class App {
   public static void main(String[] args) throws Exception {
-    Scanner scanner = new Scanner(System.in);
-    String resposta = null;
-
-    while (true) {
-      System.out.println("Deseja inserir nós na árvore? (S/n)");
-      resposta = scanner.next();
-
-      if (resposta.equals("N") || resposta.equals("n")) {
-        System.out.println("Tenha um bom dia");
-        scanner.close();
-        System.exit(0);
-      } else if (resposta.equals("S") || resposta.equals("s")) {
-        break;
-      }
-    }
-
+    ArvoreView arvoreView = new ArvoreView();
     Arvore arvore = new Arvore();
 
-    try {
-      System.out.println("Deseja inserir quantos nós na árvore?");
-      int count = scanner.nextInt();
+    while (true) {
+      Scanner scanner = new Scanner(System.in);
+      int resposta = 0;
 
-      if (count <= 0) {
-        System.out.println("Inserção não realizada");
-        System.exit(0);
+      try {
+        System.out.println("Menu de opções");
+        System.out.println("1 - Inserir nós (nodos) na árvore");
+        System.out.println("2 - Listar árvores");
+        System.out.println("3 - Sair");
+        resposta = scanner.nextInt();
+      } catch (InputMismatchException e) {
+        System.out.println("Valor não numérico");
+        continue;
       }
 
-      for (int i = 0; i < count; i++) {
-        Nodo tmp = new Nodo();
-        System.out.println("Digite um número inteiro aleatório:");
-        tmp.numero = scanner.nextInt();
-        arvore.inserir(tmp);
-      }
-
-      System.out.println("Deseja listar todos os valores? (S/n)");
-      resposta = scanner.next();
-
-      if (resposta.equals("N") || resposta.equals("n")) {
-        System.out.println("Tenha um bom dia");
+      if (resposta == 3) {
+        System.out.println("Tenha um dia excelente!");
         scanner.close();
         System.exit(0);
-      } else if (resposta.equals("S") || resposta.equals("S")) {
-        arvore.listar(arvore.raiz);
-      } else {
-        System.out.println("Opção não reconhecida");
       }
-    } catch (Exception e) {
-      System.out.println("Valor não inteiro");
+
+      switch (resposta) {
+        case 1:
+          int count = 0;
+
+          try {
+            System.out.println("Deseja inserir quantos nós na árvore?");
+            count = scanner.nextInt();
+          } catch (InputMismatchException e) {
+            System.out.println("Não é possível inserir valores não numéricos");
+            break;
+          }
+
+          if (count <= 0) {
+            System.out.println("Não é possível inserir valores vazios ou negativos");
+            break;
+          }
+
+          for (int i = 0; i < count; i++) {
+            Nodo tmp = new Nodo();
+            boolean status = false;
+            do {
+              status = arvoreView.inserirNumero(tmp, scanner);
+            } while (status == false);
+            arvore.inserir(tmp);
+          }
+          break;
+
+        case 2:
+          break;
+
+        default:
+          System.out.println("Opção não reconhecida");
+          break;
+      }
     }
   }
 }
