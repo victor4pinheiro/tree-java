@@ -62,6 +62,12 @@ public class App {
           break;
 
         case 2:
+          if (arvore.raiz == null) {
+            System.out.println("Árvore vazia");
+            break;
+          }
+          System.out.println("Listagem de nós da árvore");
+          arvore.listar(arvore.raiz);
           break;
 
         default:
