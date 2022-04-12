@@ -3,6 +3,36 @@ import java.util.Scanner;
 
 public class ArvoreView {
   /**
+   * Insere nodos de acordo com a quantidade de nodos (se válido)
+   * 
+   * @param tmpScanner scanner temporário para entrada de valores digitadas pelo
+   *                   usuário
+   */
+  public void inserirNodos(Scanner tmpScanner) {
+    int count = 0;
+
+    try {
+      System.out.println("Deseja inserir quantos nós na árvore?");
+      count = tmpScanner.nextInt();
+    } catch (InputMismatchException e) {
+      System.out.println("Não é possível inserir valores não numéricos");
+      return;
+    }
+
+    if (count <= 0) {
+      System.out.println("Não é possível inserir valores vazios ou negativos");
+      return;
+    }
+
+    for (int i = 0; i < count; i++) {
+      boolean status = false;
+      do {
+        status = inserirNumero(tmpScanner);
+      } while (status == false);
+    }
+  }
+
+  /**
    * Insere o nodo com o valor dentro da árvore
    * 
    * @param tmpScanner scanner temporário para entrada de valores digitadas pelo

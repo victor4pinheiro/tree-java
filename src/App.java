@@ -35,27 +35,7 @@ public class App {
 
       switch (resposta) {
         case 1:
-          int count = 0;
-
-          try {
-            System.out.println("Deseja inserir quantos nós na árvore?");
-            count = scanner.nextInt();
-          } catch (InputMismatchException e) {
-            System.out.println("Não é possível inserir valores não numéricos");
-            break;
-          }
-
-          if (count <= 0) {
-            System.out.println("Não é possível inserir valores vazios ou negativos");
-            break;
-          }
-
-          for (int i = 0; i < count; i++) {
-            boolean status = false;
-            do {
-              status = arvoreView.inserirNumero(scanner);
-            } while (status == false);
-          }
+          arvoreView.inserirNodos(scanner);
           break;
 
         case 2:
