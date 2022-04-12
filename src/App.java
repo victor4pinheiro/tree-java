@@ -19,15 +19,16 @@ public class App {
       try {
         System.out.println("Menu de opções");
         System.out.println("1 - Inserir nós (nodos) na árvore");
-        System.out.println("2 - Listar árvores");
-        System.out.println("3 - Sair");
+        System.out.println("2 - Listar os valores da árvore de acordo com a profundidade da árvore");
+        System.out.println("3 - Listar os valores da árvore de acordo com a largura da árvore");
+        System.out.println("4 - Sair");
         resposta = scanner.nextInt();
       } catch (InputMismatchException e) {
         System.out.println("Valor não numérico");
         continue;
       }
 
-      if (resposta == 3) {
+      if (resposta == 4) {
         System.out.println("Tenha um dia excelente!");
         scanner.close();
         System.exit(0);
@@ -40,6 +41,11 @@ public class App {
 
         case 2:
           arvoreView.listarNodos(scanner);
+          break;
+
+        case 3:
+          Nodo.imprimirNodosPorLargura(Nodo.raiz);
+          System.out.print("\n");
           break;
 
         default:

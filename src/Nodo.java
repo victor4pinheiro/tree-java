@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * Classe padrão para criar cada nó da árvore
  * 
@@ -92,6 +95,32 @@ public class Nodo {
       ordem(node.esquerda);
       System.out.print(node.numero + ", ");
       ordem(node.direita);
+    }
+  }
+
+  /**
+   * Imprimi os nodos de acordo com a largura da árvore
+   * 
+   * @param node origem (valor inicial) para a árvore ser percorrida
+   */
+  public static void imprimirNodosPorLargura(Nodo node) {
+    if (node == null) {
+      System.out.println("Árvore vazia");
+    } else {
+      System.out.println();
+      Deque<Nodo> fila = new ArrayDeque<Nodo>();
+      fila.add(node);
+      while (!fila.isEmpty()) {
+        Nodo atual = fila.removeFirst();
+
+        System.out.print(atual.numero + ", ");
+        if (atual.esquerda != null) {
+          fila.add(atual.esquerda);
+        }
+        if (atual.direita != null) {
+          fila.add(atual.direita);
+        }
+      }
     }
   }
 }
