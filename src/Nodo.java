@@ -53,4 +53,45 @@ public class Nodo {
 
     return tmpNodo;
   }
+
+  /**
+   * Lista os nós (nodos) de uma árvore em pré-ordem: pai (raiz) - esquerda -
+   * direita
+   * 
+   * @param node nodo de origem para percorrer
+   */
+  public static void preordem(Nodo node) {
+    if (node != null) {
+      System.out.print(node.numero + ", ");
+      preordem(node.esquerda);
+      preordem(node.direita);
+    }
+  }
+
+  /**
+   * Lista os nós (nodos) de uma árvore em ordem: esquerda - pai (raiz) - direita
+   * 
+   * @param node nodo de origem para percorrer
+   */
+  public static void posordem(Nodo node) {
+    if (node != null) {
+      posordem(node.esquerda);
+      posordem(node.direita);
+      System.out.print(node.numero + ", ");
+    }
+  }
+
+  /**
+   * Lista os nós (nodos) de uma árvore em pós-ordem: esquerda - direita - pai
+   * (raiz)
+   * 
+   * @param node nodo de origem para percorrer
+   */
+  public static void ordem(Nodo node) {
+    if (node != null) {
+      ordem(node.esquerda);
+      System.out.print(node.numero + ", ");
+      ordem(node.direita);
+    }
+  }
 }
