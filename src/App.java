@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class App {
   public static void main(String[] args) throws Exception {
     ArvoreView arvoreView = new ArvoreView();
-    Arvore arvore = new Arvore();
 
     while (true) {
       Scanner scanner = new Scanner(System.in);
@@ -52,22 +51,20 @@ public class App {
           }
 
           for (int i = 0; i < count; i++) {
-            Nodo tmp = new Nodo();
             boolean status = false;
             do {
-              status = arvoreView.inserirNumero(tmp, scanner);
+              status = arvoreView.inserirNumero(scanner);
             } while (status == false);
-            arvore.inserir(tmp);
           }
           break;
 
         case 2:
-          if (arvore.raiz == null) {
+          if (Nodo.raiz == null) {
             System.out.println("Árvore vazia");
             break;
           }
           System.out.println("Listagem de nós da árvore");
-          arvore.listar(arvore.raiz);
+          // arvore.listar(Nodo.raiz);
           break;
 
         default:
