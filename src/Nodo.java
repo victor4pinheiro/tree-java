@@ -1,3 +1,6 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 /**
  * Classe padrão para criar cada nó da árvore
  * 
@@ -9,12 +12,115 @@ public class Nodo {
   int numero;
   Nodo esquerda;
   Nodo direita;
-  Nodo pai;
+  int nivelArvore;
+  public static Nodo raiz;
 
-  public Nodo() {
-    this.numero = 0;
+  /**
+   * Inicializa os valores no atual nodo
+   * 
+   * @param numero número a ser inserido no Nodo atual
+   */
+  public Nodo(int numero) {
+    this.numero = numero;
     this.esquerda = null;
     this.direita = null;
-    this.pai = null;
+  }
+
+  /**
+   * Insere valores na árvore a partir da raiz
+   * 
+   * @param numero número a ser adicionado
+   */
+  public static void inserir(int numero) {
+    raiz = inserirNodo(raiz, numero);
+  }
+
+  /**
+   * Insere o valor no Nodo de acordo com a sua posição atual na árvore de forma
+   * recursiva
+   * 
+   * @param tmpNodo Nodo atual a ser verificado e possivelmente atribuído
+   * @param value   valor a ser inserido no Nodo
+   * @return Nodo com o valor já atribuido
+   */
+  private static Nodo inserirNodo(Nodo tmpNodo, int value) {
+    if (tmpNodo == null)
+      return new Nodo(value);
+
+    if (value < tmpNodo.numero)
+      tmpNodo.esquerda = inserirNodo(tmpNodo.esquerda, value);
+    else if (value > tmpNodo.numero)
+      tmpNodo.direita = inserirNodo(tmpNodo.direita, value);
+    else
+      return tmpNodo;
+
+    return tmpNodo;
+  }
+
+  /**
+   * Lista os nós (nodos) de uma árvore em pré-ordem: pai (raiz) - esquerda -
+   * direita
+   * 
+   * @param node nodo de origem para percorrer
+   */
+  public static void preordem(Nodo node) {
+    if (node != null) {
+      System.out.print(node.numero + ", ");
+      preordem(node.esquerda);
+      preordem(node.direita);
+    }
+  }
+
+  /**
+   * Lista os nós (nodos) de uma árvore em ordem: esquerda - pai (raiz) - direita
+   * 
+   * @param node nodo de origem para percorrer
+   */
+  public static void posordem(Nodo node) {
+    if (node != null) {
+      posordem(node.esquerda);
+      posordem(node.direita);
+      System.out.print(node.numero + ", ");
+    }
+  }
+
+  /**
+   * Lista os nós (nodos) de uma árvore em pós-ordem: esquerda - direita - pai
+   * (raiz)
+   * 
+   * @param node nodo de origem para percorrer
+   */
+  public static void ordem(Nodo node) {
+    if (node != null) {
+      ordem(node.esquerda);
+      System.out.print(node.numero + ", ");
+      ordem(node.direita);
+    }
+  }
+
+  /**
+   * Imprimi os nodos de acordo com a largura da árvore
+   * 
+   * @param node origem (valor inicial) para a árvore ser percorrida
+   */
+  public static void imprimirNodosPorLargura(Nodo node) {
+    if (node == null) {
+      System.out.println("Árvore vazia");
+    } else {
+      System.out.println();
+      Deque<Nodo> fila = new ArrayDeque<Nodo>();
+      fila.add(node);
+      while (!fila.isEmpty()) {
+        Nodo atual = fila.removeFirst();
+
+        System.out.print(atual.numero + ", ");
+        if (atual.esquerda != null) {
+          fila.add(atual.esquerda);
+        }
+        if (atual.direita != null) {
+          fila.add(atual.direita);
+        }
+      }
+    }
   }
 }

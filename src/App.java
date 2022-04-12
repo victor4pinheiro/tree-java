@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class App {
   public static void main(String[] args) throws Exception {
     ArvoreView arvoreView = new ArvoreView();
-    Arvore arvore = new Arvore();
 
     while (true) {
       Scanner scanner = new Scanner(System.in);
@@ -20,15 +19,16 @@ public class App {
       try {
         System.out.println("Menu de opções");
         System.out.println("1 - Inserir nós (nodos) na árvore");
-        System.out.println("2 - Listar árvores");
-        System.out.println("3 - Sair");
+        System.out.println("2 - Listar os valores da árvore de acordo com a profundidade da árvore");
+        System.out.println("3 - Listar os valores da árvore de acordo com a largura da árvore");
+        System.out.println("4 - Sair");
         resposta = scanner.nextInt();
       } catch (InputMismatchException e) {
         System.out.println("Valor não numérico");
         continue;
       }
 
-      if (resposta == 3) {
+      if (resposta == 4) {
         System.out.println("Tenha um dia excelente!");
         scanner.close();
         System.exit(0);
@@ -36,38 +36,16 @@ public class App {
 
       switch (resposta) {
         case 1:
-          int count = 0;
-
-          try {
-            System.out.println("Deseja inserir quantos nós na árvore?");
-            count = scanner.nextInt();
-          } catch (InputMismatchException e) {
-            System.out.println("Não é possível inserir valores não numéricos");
-            break;
-          }
-
-          if (count <= 0) {
-            System.out.println("Não é possível inserir valores vazios ou negativos");
-            break;
-          }
-
-          for (int i = 0; i < count; i++) {
-            Nodo tmp = new Nodo();
-            boolean status = false;
-            do {
-              status = arvoreView.inserirNumero(tmp, scanner);
-            } while (status == false);
-            arvore.inserir(tmp);
-          }
+          arvoreView.inserirNodos(scanner);
           break;
 
         case 2:
-          if (arvore.raiz == null) {
-            System.out.println("Árvore vazia");
-            break;
-          }
-          System.out.println("Listagem de nós da árvore");
-          arvore.listar(arvore.raiz);
+          arvoreView.listarNodos(scanner);
+          break;
+
+        case 3:
+          Nodo.imprimirNodosPorLargura(Nodo.raiz);
+          System.out.print("\n");
           break;
 
         default:
