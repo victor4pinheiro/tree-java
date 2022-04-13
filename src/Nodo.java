@@ -31,30 +31,39 @@ public class Nodo {
    * 
    * @param numero número a ser adicionado
    */
-  public static void inserir(int numero) {
-    raiz = inserirNodo(raiz, numero);
+  public static void inserir(int valor) {
+    inserir(raiz, valor);
   }
 
   /**
-   * Insere o valor no Nodo de acordo com a sua posição atual na árvore de forma
-   * recursiva
+   * Insere diretamente o valor no Nodo de acordo com a sua posição atual na
+   * árvore de forma recursiva
    * 
    * @param tmpNodo Nodo atual a ser verificado e possivelmente atribuído
-   * @param value   valor a ser inserido no Nodo
-   * @return Nodo com o valor já atribuido
+   * @param numero  valor a ser inserido no Nodo
    */
-  private static Nodo inserirNodo(Nodo tmpNodo, int value) {
-    if (tmpNodo == null)
-      return new Nodo(value);
+  public static void inserir(Nodo tmpNodo, int numero) {
+    if (tmpNodo == null) {
+      System.out.println("Raiz " + numero);
+      raiz = new Nodo(numero);
+    } else {
+      if (numero < tmpNodo.numero) {
+        if (tmpNodo.esquerda != null) {
+          inserir(tmpNodo.esquerda, numero);
+        } else {
+          System.out.println("Inserindo " + numero + " à esquerda de " + tmpNodo.numero);
+          tmpNodo.esquerda = new Nodo(numero);
+        }
 
-    if (value < tmpNodo.numero)
-      tmpNodo.esquerda = inserirNodo(tmpNodo.esquerda, value);
-    else if (value > tmpNodo.numero)
-      tmpNodo.direita = inserirNodo(tmpNodo.direita, value);
-    else
-      return tmpNodo;
-
-    return tmpNodo;
+      } else {
+        if (tmpNodo.direita != null) {
+          inserir(tmpNodo.direita, numero);
+        } else {
+          System.out.println("Inserindo " + numero + " à direita de " + tmpNodo.numero);
+          tmpNodo.direita = new Nodo(numero);
+        }
+      }
+    }
   }
 
   /**
